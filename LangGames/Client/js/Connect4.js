@@ -44,10 +44,13 @@ function AppViewModel() {
 
 	}
 
-	this.addDisc = function( parent )
+
+
+
+	this.dropDisc = function( parent, column )
 	{
 		var oParent = parent;
-		var pColumn = this;
+		var pColumn = column;
 
 		var previousTranslation = pColumn.translation();
 		oParent.translation(previousTranslation);
@@ -73,10 +76,30 @@ function AppViewModel() {
 				pColumn[ i ]( sPlayer );
 				return;
 			}
-		}
+		}		
+
+	}
+
+	this.skipTurn = function( parent , column)
+	{
+		var oParent = parent;
+		var oColumn = column;
+		oParent.dropColour("white");
+
+		var bRedTurn = !oParent.redTurn();
+		oParent.redTurn(bRedTurn);
+
+		oParent.showArrows(true);
+		oParent.message("Pick a column");
+
+		oColumn.imgSelected(false);
+
+		oParent.translation("INCORRECT");
 
 
-	};
+
+	}
+
 
 	this.selectImage = function( parent )
 	{
@@ -88,7 +111,10 @@ function AppViewModel() {
 		pColumn.imgSelected(true);
 		
 		var oParent = parent;
-		oParent.message("");
+
+		oParent.selectedColumnIndex = pColumn.number() - 1;
+		oParent.selectedTranslation =  pColumn.translation();
+		oParent.message("<-Choose your answer->");
 		
 		var nextColour = oParent.redTurn() ? "blue" : "red";
 
@@ -107,9 +133,31 @@ function AppViewModel() {
 
 	}  
 
-	this.registerGuess = function(data)
+	this.registerGuess = function(parent,  data)
 	{
-		alert(data);
+		var oParent = parent;
+
+		if(oParent.showArrows())
+		{
+			return;
+		}
+
+		var i = oParent.selectedColumnIndex;
+		var oColumn = oParent.grid()[i]();
+
+		var userGuess = data;
+		var correctTranslation = oParent.selectedTranslation;
+
+		if(userGuess == correctTranslation)
+		{
+			
+			oParent.dropDisc(oParent, oColumn);      
+		}
+		else
+		{
+			oParent.skipTurn(oParent , oColumn);
+		}
+
 	}
 
 

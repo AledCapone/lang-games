@@ -24,7 +24,7 @@
 
 
 	<div id="choices-left" data-bind="foreach:pLeftSideChoices">
-		<button class="choiceButton choice" data-bind="text:$data, click:$root.registerGuess"></button>
+		<button class="choiceButton choice" data-bind="text:$data, click:$root.registerGuess.bind($data, $parent) , css: { 'redChoice' : !$parent.redTurn()}"></button>
 
 	</div>	
 
@@ -37,7 +37,7 @@
 			<br>
 			<br>
 			<br>
-			<br>
+
 			<div id="wrapper">
 				<div data-bind="foreach:grid">
 
@@ -62,8 +62,8 @@
 							<img class="image1" data-bind="attr:{src:$data.imgSrc} , enabled : $parent.showArrows , css: { selected : $data.imgSelected }"/></br>
 
 							<div style="height:50px;">
-								<div class="disc arrow" data-bind="visible: $parent.showArrows(), text: $data.number, click: $root.selectImage.bind($data,$parent)" ></div>
-								<button class="butt" data-bind="visible: $data.imgSelected() , click: $root.addDisc.bind($data, $parent)" >DROP</button>
+								<div class="disc arrow" data-bind="visible: $parent.showArrows(), text: $data.number, click: $root.selectImage.bind($data,$parent), css: { 'redChoice' : !$parent.redTurn()}" ></div>
+								
 
 							</div>
 
@@ -73,12 +73,12 @@
 
 				</div>
 
-			<div class="message" data-bind="text: message"></div>	
+			<!--div class="message" data-bind="text: message"></div-->	
 			</div>
 	</div>
 
 	<div id="choices-right" data-bind="foreach:pRightSideChoices">
-		<button class="choiceButton choice" data-bind="text:$data"></button>
+		<button class="choiceButton choice" data-bind="text:$data, click:$root.registerGuess.bind($data, $parent) , css: { 'redChoice' : !$parent.redTurn()}"></button>
 
 	</div>	
 
@@ -87,6 +87,7 @@
 <div id="right">
 
 </div>	
+<div class="message" data-bind="text: message"></div>
 
 </body>
 
