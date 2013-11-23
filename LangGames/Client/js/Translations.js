@@ -1,7 +1,12 @@
-Translations = function(topic)
+Translations = function(topic, language)
 {
 	this.Mappings = this.allTopics[topic];
+	this.language = language;
 	this.index = 0;
+	var SortedTranslationsArray = this._getSortedArray();
+	var halfWay = Math.round(SortedTranslationsArray.length / 2);
+	this.leftChoices = SortedTranslationsArray.splice(0,halfWay);
+	this.rightChoices = SortedTranslationsArray;
 };
 
 Translations.prototype.getNextObject = function()
@@ -9,7 +14,24 @@ Translations.prototype.getNextObject = function()
 	this.index = (this.index < this.Mappings.length - 1) ? this.index + 1 : 0;
 
 	return this.Mappings[this.index];
+};
+
+Translations.prototype._getSortedArray = function()
+{
+	var unsortedArray = [];
+
+
+	for(var i = 0; i < this.Mappings.length ; i++)
+	{
+
+	unsortedArray.push(this.Mappings[i][this.language]);
+	
+	}
+	return unsortedArray.sort();
+
 }
+
+
 
 
 Translations.prototype.allTopics = {

@@ -10,7 +10,11 @@ function AppViewModel() {
 	this.topic = "animals";
 	this.language = "spanish";
 
-	this.translationArray = new Translations(this.topic);
+	this.translationArray = new Translations(this.topic, this.language);
+
+	this.pLeftSideChoices = ko.observableArray(this.translationArray.leftChoices);
+	this.pRightSideChoices = ko.observableArray(this.translationArray.rightChoices);
+
 
 	this.grid = ko.observableArray();
 	var dimension = 7;
@@ -102,6 +106,11 @@ function AppViewModel() {
 		oParent.translation(selectedNameClue);
 
 	}  
+
+	this.registerGuess = function(data)
+	{
+		alert(data);
+	}
 
 
 }

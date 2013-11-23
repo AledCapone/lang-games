@@ -22,7 +22,9 @@
 
 <div id="middle">
 
-	<div id="choices-left">
+
+	<div id="choices-left" data-bind="foreach:pLeftSideChoices">
+		<button class="choiceButton choice" data-bind="text:$data, click:$root.registerGuess"></button>
 
 	</div>	
 
@@ -75,10 +77,10 @@
 			</div>
 	</div>
 
-	<div id="choices-left">
+	<div id="choices-right" data-bind="foreach:pRightSideChoices">
+		<button class="choiceButton choice" data-bind="text:$data"></button>
 
-	</div>
-
+	</div>	
 
 </div>
 
