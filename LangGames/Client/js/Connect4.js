@@ -6,7 +6,11 @@ function AppViewModel() {
 	this.dropColour = ko.observable("white");
 	this.showArrows = ko.observable(true);
 	this.message = ko.observable("Pick a column");
-	this.translationArray = new Translations("animals");
+
+	this.topic = "animals";
+	this.language = "spanish";
+
+	this.translationArray = new Translations(this.topic);
 
 	this.grid = ko.observableArray();
 	var dimension = 7;
@@ -28,7 +32,7 @@ function AppViewModel() {
 
 		pColumn.imgSrc = ko.observable(newPair.url);
 		
-		pColumn.translation = ko.observable(newPair.name);
+		pColumn.translation = ko.observable(newPair[this.language]);
 
 		pColumn.imgSelected = ko.observable(false);
 		
@@ -48,7 +52,7 @@ function AppViewModel() {
 
 		pColumn.imgSrc(newPair.url);
 
-		pColumn.translation(newPair.name);
+		pColumn.translation(newPair[oParent.language]);
 
 		pColumn.imgSelected(false);
 		oParent.showArrows(true);
