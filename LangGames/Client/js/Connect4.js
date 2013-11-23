@@ -127,7 +127,7 @@ function AppViewModel() {
 
 		oParent.dropColour(nextColour);
 		var selectedImage = pColumn.imgSrc();
-		var selectedNameClue = "";
+		var selectedNameClue = " ";
 
 		for(var i = 0; i < pColumn.translation().length ; i++)
 		{
