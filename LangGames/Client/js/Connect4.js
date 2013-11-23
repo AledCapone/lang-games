@@ -1,44 +1,3 @@
-var translationArray = [
-
-	{	name : "El caballo" , url : "images/El caballo.jpg"		},
-	{	name : "El cerdo" , url : "images/El cerdo.jpg"		},
-	{	name : "El cocodrilo" , url : "images/El cocodrilo.jpg"		},
-	{	name : "El conejo" , url : "images/El conejo.jpg"		},
-	{	name : "El delfin" , url : "images/El delfin.jpg"		},
-	{	name : "El elefante" , url : "images/El elefante.jpg"		},
-	{	name : "El gato" , url : "images/El gato.jpg"		},
-	{	name : "El leon" , url : "images/El leon.jpg"		},
-	{	name : "El mono" , url : "images/El mono.jpg"		},
-	{	name : "El oso" , url : "images/El oso.jpg"		},
-	{	name : "El pajaro" , url : "images/El pajaro.jpg"		},
-	{	name : "El pato" , url : "images/El pato.jpg"		},
-	{	name : "El perro" , url : "images/El perro.jpg"		},
-	{	name : "El pez" , url : "images/El pez.jpg"		},
-	{	name : "El pinguino" , url : "images/El pinguino.jpg"		},
-	{	name : "El tigre" , url : "images/El tigre.jpg"		},
-	{	name : "La cobaya" , url : "images/La cobaya.jpg"		},
-	{	name : "La gallina" , url : "images/La gallina.jpg"		},
-	{	name : "La jirafa" , url : "images/La jirafa.jpg"		},
-	{	name : "La oveja" , url : "images/La oveja.jpg"		},
-	{	name : "La rana" , url : "images/La rana.jpg"		},
-	{	name : "La serpiente" , url : "images/La serpiente.jpg"		},
-	{	name : "La tortuga" , url : "images/La tortuga.jpg"		},
-	{	name : "La vaca" , url : "images/La vaca.jpg"		}
-	
-
-];
-
-translationArray.index = 0;
-
-//translation array sshould be a class and object on the VM.
-
-translationArray.getNextObject = function()
-{
-	this.index = (this.index < this.length - 1) ? this.index + 1 : 0;
-
-	return this[this.index];
-}
-
 function AppViewModel() {	
 
 	this.choiceImgSrc = ko.observable();
@@ -47,7 +6,7 @@ function AppViewModel() {
 	this.dropColour = ko.observable("white");
 	this.showArrows = ko.observable(true);
 	this.message = ko.observable("Pick a column");
-	
+	this.translationArray = new Translations("animals");
 
 	this.grid = ko.observableArray();
 	var dimension = 7;
@@ -62,7 +21,7 @@ function AppViewModel() {
 			this.grid()[i].push(ko.observable(content));
 		}
 
-		var newPair = translationArray.getNextObject();
+		var newPair = this.translationArray.getNextObject();
 
 		var pColumn = this.grid()[i]();
 		pColumn.number = ko.observable(i + 1);
@@ -85,7 +44,7 @@ function AppViewModel() {
 		var previousTranslation = pColumn.translation();
 		oParent.translation(previousTranslation);
 
-		var newPair = translationArray.getNextObject();
+		var newPair = oParent.translationArray.getNextObject();
 
 		pColumn.imgSrc(newPair.url);
 

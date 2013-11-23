@@ -3,8 +3,10 @@
 
 #left{
 	width:20%;
-	height:600px;
+	height:100%;
 	float:left;
+	background-image: url("../images/bg_tile.gif");
+	background-repeat: repeat;
 
 }
 
@@ -17,15 +19,29 @@
 
 #right{
 	width:20%;
-	height:600px;
-	float:left;
+	height:100%;
+	float:right;
+	background-image: url("../images/bg_tile.gif");
+	background-repeat: repeat;
+
+}
+
+#choices-left
+{
+	width:32%;
 
 }
 
 #content
 {
-	width:50%;
+	width:36%;
 	margin: 0 auto;
+}
+
+#choices-right
+{
+	width:32%;
+
 }
 
 .column
