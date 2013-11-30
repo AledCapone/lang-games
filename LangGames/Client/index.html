@@ -18,6 +18,13 @@
 <body>
 
 <div id="left">
+		<div class="catSelection">Choose Category
+		<div class="langOptions" data-bind="foreach:categoryButtons">
+			<button class="roundbutt largesize" data-bind="style: { backgroundImage: $data.Url }"></button>
+		</div>
+
+	</div>	
+
 </div>
 
 <div id="middle">
@@ -85,6 +92,13 @@
 </div>
 
 <div id="right">
+	<div class="langSelection">Change Language
+		<div class="langOptions" data-bind="foreach:languageButtons">
+			<button class="roundbutt smallsize" data-bind="style: { backgroundImage: $data.flagUrl }, click: $root.changeLanguage.bind($data,  $parent)"></button>
+		</div>
+
+	</div>	
+	
 
 </div>	
 <div class="message" data-bind="text: message"></div>

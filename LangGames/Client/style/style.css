@@ -97,6 +97,32 @@
 	font-weight: 600;
 }
 
+.roundbutt
+{
+	width:60px; 
+  	height:60px; 
+  	background-size: 100%; /* To fill the dimensions of container (button), or */
+	border-radius: 17px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.smallsize
+{
+	width:60px; 
+  	height:60px; 
+}
+
+.largesize
+{
+	width:90px; 
+  	height:90px; 
+}
+
 
 .arrow
 {
@@ -144,19 +170,21 @@
 
 .choiceImage
 {
-	height:62px;
-	width:62px;
+height: 80px;
+width: 80px;
 	background-size: contain;
 	background-repeat: no-repeat;
 	no-repeat;
 	float: left;
-	margin-left: 70px;
+
 }
 
 .choiceTranslation
 {
 	font-size: 24px;
 	float: left;
+	height: 60px;
+width: 200px;
 }
 
 .selected
@@ -232,6 +260,7 @@
 }
 
 .choiceButton {
+	font-size: 16px;
     padding: 10px 15px;
     background: #4479BA;
     color: #FFF;
@@ -268,4 +297,26 @@
 {
 
 	background: #BA4444;
+}
+
+
+
+/* right
+*/
+.langSelection{
+	margin-top: 86px;
+	margin-left: 30px;
+	font-family: Comic Sans MS;
+	font-size: 32px;
+}
+
+/* left
+*/
+.catSelection
+{
+	margin-top: 86px;
+	margin-left: 30px;
+	font-family: Comic Sans MS;
+	font-size: 32px;
+
 }

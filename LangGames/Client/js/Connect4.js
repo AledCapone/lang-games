@@ -1,4 +1,5 @@
-function AppViewModel() {	
+AppViewModel = function() 
+{	
 
 	this.choiceImgSrc = ko.observable();
 	this.translation = ko.observable();
@@ -7,16 +8,32 @@ function AppViewModel() {
 	this.showArrows = ko.observable(true);
 	this.message = ko.observable("Pick a column");
 
-	this.topic = "animals";
-	this.language = "spanish";
+	//temp
+	this.flagBackground = "url('images/SpainFlag.png')";
+
+	this.topic = "animals"; //HARDCODED
+	this.language = "Spanish"; //HARDCODED
 
 	this.translationArray = new Translations(this.topic, this.language);
+
+	this.languageButtons = ko.observableArray(this.translationArray.languageOptions);
+	this.categoryButtons = ko.observableArray(this.translationArray.categoryOptions);
+
+	this.languageOptions = ko.observableArray(this.translationArray.getLanguageOptionsFor(this.topic));
 
 	this.pLeftSideChoices = ko.observableArray(this.translationArray.leftChoices);
 	this.pRightSideChoices = ko.observableArray(this.translationArray.rightChoices);
 
-
 	this.grid = ko.observableArray();
+
+	this._constructBlankGrid();
+	
+
+}
+
+AppViewModel.prototype._constructBlankGrid = function()
+{
+	this.grid([]);
 	var dimension = 7;
 
 	for(var i = 0 ; i < dimension; i++)
@@ -46,9 +63,12 @@ function AppViewModel() {
 
 
 
+}
 
-	this.dropDisc = function( parent, column )
-	{
+
+
+AppViewModel.prototype.dropDisc = function( parent, column )
+{
 		var oParent = parent;
 		var pColumn = column;
 
@@ -78,10 +98,10 @@ function AppViewModel() {
 			}
 		}		
 
-	}
+}
 
-	this.skipTurn = function( parent , column)
-	{
+AppViewModel.prototype.skipTurn = function( parent , column)
+{
 		var oParent = parent;
 		var oColumn = column;
 		oParent.dropColour("white");
@@ -98,11 +118,11 @@ function AppViewModel() {
 
 
 
-	}
+}
 
 
-	this.selectImage = function( parent )
-	{
+AppViewModel.prototype.selectImage = function( parent )
+{
 		var pColumn = this;
 
 		if(!parent.showArrows())
@@ -114,7 +134,7 @@ function AppViewModel() {
 
 		oParent.selectedColumnIndex = pColumn.number() - 1;
 		oParent.selectedTranslation =  pColumn.translation();
-		oParent.message("<-Choose your answer->");
+		oParent.message("Choose your answer");
 		
 		var nextColour = oParent.redTurn() ? "blue" : "red";
 
@@ -131,10 +151,10 @@ function AppViewModel() {
 		oParent.showArrows(false);
 		oParent.translation(selectedNameClue);
 
-	}  
+}  
 
-	this.registerGuess = function(parent,  data)
-	{
+AppViewModel.prototype.registerGuess = function(parent,  data)
+{
 		var oParent = parent;
 
 		if(oParent.showArrows())
@@ -158,8 +178,28 @@ function AppViewModel() {
 			oParent.skipTurn(oParent , oColumn);
 		}
 
-	}
+}
+
+AppViewModel.prototype.changeLanguage = function(parent, oLanguage)
+{
+	var newLanguage = oLanguage.language;
+	var oParent = parent;
+
+	oParent.language = newLanguage;
+
+	oParent.translationArray.getChoices(newLanguage);
+
+	oParent.pLeftSideChoices(oParent.translationArray.leftChoices);
+	oParent.pRightSideChoices(oParent.translationArray.rightChoices);
+
+	oParent._constructBlankGrid();
+
+	debugger;
+
 
 
 }
+
+
+
  
